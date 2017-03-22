@@ -1,10 +1,26 @@
 require "HTTParty"
 require 'nokogiri'
-require "oxford_dictionary"
-require "urban_dictionary"
-require "webster_dictionary"
+require "./oxford_dictionary"
+require_relative "urban_dictionary"
+require_relative "webster_dictionary"
 
+# def three_at_once(first_term)
+#   # puts "-----------"
+#   oxford_valid?(first_term)
+#   # puts "-----------"
+#   # valid_urban?
+#   # puts "-----------"
+#   # webster_valid?(first_term)
+#   # puts "-----------"
+# end
 
+def call_dictionaries(word)
+  puts OxfordDictionary.new.oxford_call(word)
+  puts WebsterDictionary.new.webster_call(word)
+  puts UrbanDictionary.new.urban_call(word)
+end
+
+call_dictionaries("nothing")
 # # # Urban Dictionary
 # # urban_response = HTTParty.get("https://mashape-community-urban-dictionary.p.mashape.com/define?term=mkijnbhu",
 # #   headers:{
