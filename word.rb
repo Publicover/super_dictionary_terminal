@@ -24,7 +24,7 @@ class Word
     if response.include?("!DOCTYPE")
       "NOPE"
     else
-      response["results"][0]["lexicalEntries"][0]["entries"]#[0]["senses"][0]["definitions"]
+      response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"]
     end
 
   end
