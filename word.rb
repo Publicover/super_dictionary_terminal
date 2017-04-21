@@ -1,7 +1,7 @@
-# require "./oxford_dictionary"
+# require_relative "oxford_dictionary"
 # require_relative "urban_dictionary"
 # require_relative "webster_dictionary"
-require "HTTParty"
+require 'HTTParty'
 require 'nokogiri'
 
 class Word
@@ -29,17 +29,21 @@ class Word
 
   end
 
-  def webster_call(term)
+  def self.webster_call(term)
     response = HTTParty.get("http://www.dictionaryapi.com/api/v1/references/collegiate/xml/#{term}?key=#{ENV["WEBSTER_KEY"]}")
     if response.include?("suggestion")
       "FAILED"
     else
       doc_response = Nokogiri::XML(response)
-      doc_response.xpath('//dt').first
+      # doc_response.xpath('//dt').first
+      # doc_response.search('dt').xpath('text()')
+      doc_response.text
+      # doc_response.xpath('//dt/text()')
+      # full_definition = doc_response.xpath('//dt').first
     end
   end
 
-  def urban_call(term)
+  def self.urban_call(term)
     response = HTTParty.get("https://mashape-community-urban-dictionary.p.mashape.com/define?term=#{term}",
       headers:{
         "X-MASHAPE-KEY" => ENV["MASHAPE_TEST_KEY"],
@@ -52,29 +56,34 @@ class Word
     end
   end
 
-  def self.call_dictionaries
+  def self.call_dictionaries(word)
     puts "-----------"
-    puts urban_call(@word)
+    puts "From Oxford: "
+    puts Word.oxford_call(word)
     puts "-----------"
-    puts webster_call(@word)
+    puts "From Webster: "
+    puts Word.webster_call(word)
     puts "-----------"
-    puts urban_call(@word)
+    puts "From Urban Dictionary: "
+    puts Word.urban_call(word).to_s
     puts "-----------"
   end
 
-  # def votes
-  #
-  # end
-
 end
+
+# # THE BELOW WORKS, NEED TO ADJUST WEBSTER FORMAT
+# puts "Give me a word."
+# input = gets.chomp
+# puts " "
+# new_word = input
+# puts " "
+# puts "Your word is: #{new_word}."
+# puts " "
+# puts Word.call_dictionaries(input)
+# # puts Word.oxford_call(input)
+
 
 puts "Give me a word."
 input = gets.chomp
-puts " "
-new_word = input
-puts " "
-puts "Your word is: #{new_word}."
-puts " "
-puts Word.oxford_call(new_word)
-puts " "
-# new_word.oxford_call
+# response = HTTParty.get("http://www.dictionaryapi.com/api/v1/references/collegiate/xml/#{input}?key=#{ENV["WEBSTER_KEY"]}")
+puts Word.webster_call(input)
