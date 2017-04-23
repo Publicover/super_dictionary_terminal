@@ -36,8 +36,15 @@ class Word
     else
       doc_response = Nokogiri::XML(response)
       # doc_response.xpath('//dt').first
+      definition = doc_response.xpath('//dt').first.text
+      if definition[0] == ":"
+        definition.sub(/:/, "")
+      else
+        definition
+      end
       # doc_response.search('dt').xpath('text()')
-      doc_response.text
+      # test_def = doc_response.content
+      # doc_response.content=(test_def)
       # doc_response.xpath('//dt/text()')
       # full_definition = doc_response.xpath('//dt').first
     end
@@ -69,6 +76,23 @@ class Word
     puts "-----------"
   end
 
+  def self.call_full_oxford(term)
+  response = HTTParty.get("https://od-api.oxforddictionaries.com:443/api/v1/entries/en/#{term}",
+    :headers => {
+      "Accept": "application/json",
+      "app_id": "#{ENV['OXFORD_APP_ID']}",
+      "app_key": "#{ENV['OXFORD_APP_KEY']}"
+    })
+    if response.include?("!DOCTYPE")
+      "NOPE"
+    else
+      definition = response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"]
+      # subsense = response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["subsenses"]
+      # print definition[0]
+      # print subsense[0]
+    end
+  end
+
 end
 
 # # THE BELOW WORKS, NEED TO ADJUST WEBSTER FORMAT
@@ -86,4 +110,6 @@ end
 puts "Give me a word."
 input = gets.chomp
 # response = HTTParty.get("http://www.dictionaryapi.com/api/v1/references/collegiate/xml/#{input}?key=#{ENV["WEBSTER_KEY"]}")
-puts Word.webster_call(input)
+# puts Word.webster_call(input)
+# puts Word.call_dictionaries(input)
+puts Word.call_full_oxford(input)

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<entry_list version="1.0">
+	<entry id="birthday">
+    <ew>birthday</ew>
+    <hw>birth*day</hw>
+    <sound>
+      <wav>birthd01.wav</wav>
+      <wpr>!burth-+dA</wpr>
+    </sound>
+    <pr>ˈbərth-ˌdā</pr>
+    <fl>noun</fl>
+    <def>
+      <date>14th century</date>
+      <sn>1 a</sn>
+      <dt>:the day of a person's
+        <fw>birth</fw>
+      </dt>
+      <sn>b</sn>
+      <dt>:a day of origin</dt>
+      <sn>2</sn>
+      <dt>:an anniversary of a birth
+        <vi>her 21st
+          <it>birthday</it>
+        </vi>
+      </dt>
+    </def>
+  </entry>
+	<entry id="birthday suit"><ew>birthday suit</ew><hw>birthday suit</hw><fl>noun</fl><def><date>1753</date><dt>:unclothed skin :<sx>nakedness</sx></dt></def></entry>
+	<entry id="Jefferson Davis's Birthday"><ew>Jefferson Davis's Birthday</ew><grp>Jef*fer*son Da*vis's</grp><grp>Jef*fer*son Birthday</grp><grp>Da*vis's Birthday</grp><subj>CA</subj><hw>Jef*fer*son Da*vis's Birthday</hw><sound><wav>jeffer01.wav</wav><wpr>!je-fur-sun-!dA-vu-suz-!burth-+dA</wpr></sound><pr>ˈje-fər-sən-ˈdā-və-səz-</pr><fl>noun</fl><def><date>1929</date><dt>:the first Monday in June observed as a legal holiday in many Southern states</dt></def></entry>
+	<entry id="Lee's Birthday"><ew>Lee's Birthday</ew><subj>CA</subj><hw>Lee's Birthday</hw><sound><wav>leesbi01.wav</wav><wpr>!lEz-!burth-+dA</wpr></sound><pr>ˈlēz-</pr><fl>noun</fl><et>Robert E. <it>Lee</it></et><def><date>1910</date><dt>:January 19 or the third Monday in January observed as a legal holiday in many southern states</dt></def></entry>
+	<entry id="Lincoln's Birthday"><ew>Lincoln's Birthday</ew><subj>CA</subj><hw>Lincoln's Birthday</hw><sound><wav>lincol04.wav</wav><wpr>!liN-kunz-!burth-+dA</wpr></sound><pr>ˈliŋ-kənz-</pr><fl>noun</fl><def><date>1898</date> <sn>1</sn> <dt>:February 12 observed as a legal holiday in many states of the United States</dt> <sn>2</sn> <dt>:the first Monday in February observed as a legal holiday by some states of the United States</dt></def></entry>
+	<entry id="Washington's Birthday"><ew>Washington's Birthday</ew><subj>CA</subj><hw>Washington's Birthday</hw><fl>noun</fl><et>George <it>Washington</it></et><def><date>1829</date> <sn>1</sn> <dt>:February 22 formerly observed as a legal holiday in most of the states of the United States</dt> <sn>2</sn> <dt>:the third Monday in February observed as a legal holiday in most of the states of the United States <ca>called also <cat>Presidents' Day</cat></ca></dt></def></entry>
