@@ -88,6 +88,7 @@ class Word
     else
       definition = response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"]
       # subsense = response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["subsenses"]
+      # subsense.each { |word| p word}
       # print definition[0]
       # print subsense[0]
     end
