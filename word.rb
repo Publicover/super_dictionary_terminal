@@ -87,6 +87,7 @@ class Word
       "NOPE"
     else
       definition = response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"]
+      response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"]
       # subsense = response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["subsenses"]
       # subsense.each { |word| p word}
       # print definition[0]
@@ -107,6 +108,10 @@ end
 # puts Word.call_dictionaries(input)
 # # puts Word.oxford_call(input)
 
+
+
+# TRANSLATING TO RAILS:
+# USE #.exists? to check if word already exists in the database
 
 puts "Give me a word."
 input = gets.chomp

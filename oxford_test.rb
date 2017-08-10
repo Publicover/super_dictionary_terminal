@@ -18,7 +18,8 @@
                 [
                   {"definitions"=>
                     [
-                      "the anniversary of the day on which a person was born, typically treated as an occasion for celebration and the giving of gifts"],
+                      "the anniversary of the day on which a person was born, typically treated as an occasion for celebration and the giving of gifts"
+                    ],
                       "examples"=>
                       [
                         {"text"=>"his twenty-ninth birthday"},
