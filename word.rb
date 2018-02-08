@@ -88,6 +88,7 @@ class Word
     else
       definition = response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"]
       response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"]
+
       # subsense = response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["subsenses"]
       # subsense.each { |word| p word}
       # print definition[0]
@@ -119,3 +120,5 @@ input = gets.chomp
 # puts Word.webster_call(input)
 # puts Word.call_dictionaries(input)
 puts Word.call_full_oxford(input)
+puts Word.webster_call(input)
+puts Word.urban_call(input)

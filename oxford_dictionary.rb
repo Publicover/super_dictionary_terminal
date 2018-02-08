@@ -1,6 +1,9 @@
+require 'HTTParty'
+require 'nokogiri'
+
 class OxfordDictionary
 
-  def oxford_call(term)
+  def self.oxford_call(term)
     response = HTTParty.get("https://od-api.oxforddictionaries.com:443/api/v1/entries/en/#{term}",
       :headers => {
         "Accept": "application/json",
@@ -11,9 +14,15 @@ class OxfordDictionary
     if response.include?("!DOCTYPE")
       "NOPE"
     else
-      response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"]
+      # response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"]
+      def_block = response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"]
     end
 
   end
 
 end
+
+puts "word please"
+input = gets.chomp
+
+puts OxfordDictionary.oxford_call(input)
