@@ -5,7 +5,6 @@ require 'HTTParty'
 require 'nokogiri'
 
 class Word
-
   def initialize(word)
     @word = word
   end
@@ -21,12 +20,18 @@ class Word
         "app_id": "#{ENV['OXFORD_APP_ID']}",
         "app_key": "#{ENV['OXFORD_APP_KEY']}"
       })
+
     if response.include?("!DOCTYPE")
       "NOPE"
     else
-      response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"]
+      defs = []
+      # response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"]
+      def_block = response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"]
+      def_block.each do |word|
+        defs << word["definitions"]
+      end
+      puts defs
     end
-
   end
 
   def self.webster_call(term)
@@ -34,19 +39,13 @@ class Word
     if response.include?("suggestion")
       "FAILED"
     else
+      defs = []
       doc_response = Nokogiri::XML(response)
       # doc_response.xpath('//dt').first
-      definition = doc_response.xpath('//dt').first.text
-      if definition[0] == ":"
-        definition.sub(/:/, "")
-      else
-        definition
-      end
-      # doc_response.search('dt').xpath('text()')
-      # test_def = doc_response.content
-      # doc_response.content=(test_def)
-      # doc_response.xpath('//dt/text()')
-      # full_definition = doc_response.xpath('//dt').first
+      defs << doc_response.css('dt').text.gsub!(':', "\n")
+      # defs.each do |item|
+      #   puts item.gsub!(':', "\n")
+      # end
     end
   end
 
@@ -56,10 +55,24 @@ class Word
         "X-MASHAPE-KEY" => ENV["MASHAPE_TEST_KEY"],
         "Accept" => "text/plain"
         })
+
     if response["result_type"] == "no_results"
       "NOPE"
     else
-      response["list"][0]["definition"]
+      defs = []
+      # response["list"][0]["definition"]
+      # if response["tags"]["list"] == "definition"
+      #   defs << response["tags"]["list"]
+      # end
+      # parsed_response = JSON.parse(response.body)
+      response["list"].each do |item|
+        # if item == "definition"
+          defs << item["definition"]
+        # end
+        # puts defs
+        # puts item["definition"]
+      end
+      puts defs
     end
   end
 
@@ -76,25 +89,25 @@ class Word
     puts "-----------"
   end
 
-  def self.call_full_oxford(term)
-  response = HTTParty.get("https://od-api.oxforddictionaries.com:443/api/v1/entries/en/#{term}",
-    :headers => {
-      "Accept": "application/json",
-      "app_id": "#{ENV['OXFORD_APP_ID']}",
-      "app_key": "#{ENV['OXFORD_APP_KEY']}"
-    })
-    if response.include?("!DOCTYPE")
-      "NOPE"
-    else
-      definition = response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"]
-      response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"]
-
-      # subsense = response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["subsenses"]
-      # subsense.each { |word| p word}
-      # print definition[0]
-      # print subsense[0]
-    end
-  end
+  # def self.call_full_oxford(term)
+  # response = HTTParty.get("https://od-api.oxforddictionaries.com:443/api/v1/entries/en/#{term}",
+  #   :headers => {
+  #     "Accept": "application/json",
+  #     "app_id": "#{ENV['OXFORD_APP_ID']}",
+  #     "app_key": "#{ENV['OXFORD_APP_KEY']}"
+  #   })
+  #   if response.include?("!DOCTYPE")
+  #     "NOPE"
+  #   else
+  #     definition = response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"]
+  #     response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["definitions"]
+  #
+  #     # subsense = response["results"][0]["lexicalEntries"][0]["entries"][0]["senses"][0]["subsenses"]
+  #     # subsense.each { |word| p word}
+  #     # print definition[0]
+  #     # print subsense[0]
+  #   end
+  # end
 
 end
 
@@ -119,6 +132,7 @@ input = gets.chomp
 # response = HTTParty.get("http://www.dictionaryapi.com/api/v1/references/collegiate/xml/#{input}?key=#{ENV["WEBSTER_KEY"]}")
 # puts Word.webster_call(input)
 # puts Word.call_dictionaries(input)
-puts Word.call_full_oxford(input)
-puts Word.webster_call(input)
-puts Word.urban_call(input)
+# puts Word.call_full_oxford(input)
+# puts Word.webster_call(input)
+# puts Word.urban_call(input)
+puts Word.call_dictionaries(input)
